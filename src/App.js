@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Cart from './components/pages/cart/Cart';
+import Checkout from './components/pages/Checkout/Checkout';
+import Home from './components/pages/Home';
+import Login from './components/pages/Login';
+import Logout from './components/pages/Logout';
+import LogoState from './context/logo/LogoState';
+import NotFound from './components/pages/NotFound';
+import Navbar from './components/layout/Navbar';
+import Signup from './components/pages/Signup';
+import UserState from './context/user/UserState';
 
-function App() {
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserState>
+      <LogoState>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <div className='container'>
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/logout' component={Logout} />
+                <Route exact path='/signup' component={Signup} />
+                <Route exact path='/cart/:login' component={Cart} />
+                <Route exact path='/checkout/:login' component={Checkout} />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
+          </div>
+        </Router>
+      </LogoState>
+    </UserState>
   );
 }
 
