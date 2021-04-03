@@ -36,7 +36,7 @@ export default (state, action) => {
             return {
                 ...state,
                 loading: false,
-                status: false
+                status: null
             }
 
         default:

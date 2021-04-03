@@ -1,46 +1,37 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../../context/user/userContext';
+import NotificationContext from '../../context/notification/notificationContext';
 import { Link, Redirect } from 'react-router-dom';
 
 const Signup = () => {
 
-    const [name, setName] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [userDetail, setUserDetail] = useState({ 'name': '', 'username': '', 'password': '' });
 
     const userContext = useContext(UserContext);
+    const notificationContext = useContext(NotificationContext);
 
-    const updateUsername = (e) => setUsername(e.target.value);
-
-    const updatePassword = (e) => setPassword(e.target.value);
-
-    const updateName = (e) => setName(e.target.value);
+    const onChangeHandler = e => {
+        setUserDetail({ ...userDetail, [e.target.name]: e.target.value })
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        let user = {
-            name: name,
-            username: username,
-            password: password
-        }
-        checkUser(user);
+        setUserDetail({ ...userDetail, [e.target.name]: e.target.value });
+        checkUser();
     }
 
-    const checkUser = (userDetail) => {
+    const checkUser = () => {
         let index = userContext.savedUser.findIndex(user => user.username === userDetail.username)
         if (index == -1) {
             userContext.addUser(userDetail);
-            setName('');
-            setUsername('');
-            setPassword('');
+            setUserDetail({ 'name': '', 'username': '', 'password': '' })
             console.log('Successfully registered')
+            notificationContext.setNotification('Successfully Registered', 'success');
         }
         else {
-            setName('');
-            setUsername('');
-            setPassword('');
+            setUserDetail({ 'name': '', 'username': '', 'password': '' })
             console.log('User already exist')
-            return;
+            notificationContext.setNotification('User Already Exist', 'danger');
         }
     }
 
@@ -53,23 +44,23 @@ const Signup = () => {
                         type='text'
                         name='name'
                         placeholder='Name'
-                        value={name}
-                        onChange={updateName}
-                        autocomplete="off" />
+                        value={userDetail.name}
+                        onChange={onChangeHandler}
+                        autoComplete="off" />
                     <input
                         type='text'
                         name='username'
                         placeholder='Username'
-                        value={username}
-                        onChange={updateUsername}
-                        autocomplete="off" />
+                        value={userDetail.username}
+                        onChange={onChangeHandler}
+                        autoComplete="off" />
                     <input
                         type='password'
                         name='password'
                         placeholder='Password'
-                        value={password}
-                        onChange={updatePassword}
-                        autocomplete="off" />
+                        value={userDetail.password}
+                        onChange={onChangeHandler}
+                        autoComplete="off" />
                     <input type='submit' value='Signup' className='btn btn-dark btn-sm my-1'></input>
                     <Link to='/' className='btn btn-dark btn-med my-1'>Login</Link>
                 </form>

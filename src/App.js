@@ -4,34 +4,38 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Cart from './components/pages/cart/Cart';
 import Checkout from './components/pages/Checkout/Checkout';
 import Home from './components/pages/Home';
-import Login from './components/pages/Login';
 import Logout from './components/pages/Logout';
-import LogoState from './context/logo/LogoState';
 import NotFound from './components/pages/NotFound';
 import Navbar from './components/layout/Navbar';
 import Signup from './components/pages/Signup';
+import Notification from './components/Notification';
+import LogoState from './context/logo/LogoState';
 import UserState from './context/user/UserState';
+import NotificationState from './context/notification/notificationState';
 
 const App = () => {
 
   return (
     <UserState>
       <LogoState>
-        <Router>
-          <div className="App">
-            <Navbar />
-            <div className='container'>
-              <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/logout' component={Logout} />
-                <Route exact path='/signup' component={Signup} />
-                <Route exact path='/cart/:login' component={Cart} />
-                <Route exact path='/checkout/:login' component={Checkout} />
-                <Route component={NotFound} />
-              </Switch>
+        <NotificationState>
+          <Router>
+            <div className="App">
+              <Navbar />
+              <div className='container'>
+                <Notification />
+                <Switch>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/logout' component={Logout} />
+                  <Route exact path='/signup' component={Signup} />
+                  <Route exact path='/cart/:login' component={Cart} />
+                  <Route exact path='/checkout/:login' component={Checkout} />
+                  <Route component={NotFound} />
+                </Switch>
+              </div>
             </div>
-          </div>
-        </Router>
+          </Router>
+        </NotificationState>
       </LogoState>
     </UserState>
   );

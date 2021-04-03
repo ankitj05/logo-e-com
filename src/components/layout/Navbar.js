@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import UserContext from '../../context/user/userContext';
 
@@ -16,17 +16,17 @@ const Navbar = ({ icon, title }) => {
                     <Link to="/">Home</Link>
                 </li>
                 {(userContext.status) ? (
-                    <Fragment>
+                    <>
                         <li>
                             <Link to={`/cart/${userContext.user.name}`}>Cart</Link>
                         </li>
                         <li>
                             <Link to="/logout">Logout</Link>
                         </li>
-                    </Fragment>
+                    </>
                 ) :
                     (
-                        <Fragment></Fragment>
+                        <></>
                     )
                 }
             </ul>

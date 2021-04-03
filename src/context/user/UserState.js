@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
-import UserContext from '../../context/user/userContext';
-import UserReducer from '../../context/user/userReduce';
+import UserContext from './userContext';
+import UserReducer from './userReduce';
 import {
     ADD_USER,
     GET_USERS,
@@ -11,7 +11,7 @@ const UserState = (props) => {
     const initialState = {
         savedUser: [{ username: 'admin', password: 'admin123' }],
         user: {},
-        status: false
+        status: null
     }
 
     const [state, dispatch] = useReducer(UserReducer, initialState);
