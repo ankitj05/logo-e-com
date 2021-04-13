@@ -7,16 +7,16 @@ const Logout = () => {
     const userContext = useContext(UserContext);
     const logoContext = useContext(LogoContext);
 
-    const logoutUser = () => {
-        console.log('Logout');
-        logoContext.clear();
-        userContext.logout();
-    }
+    // const logoutUser = () => {
+    //     console.log('Logout');
+    // }
+    logoContext.clear();
+    userContext.logout();
 
     return (
         <div>
-            {logoutUser()}
-            {userContext.status ? (<Redirect to="/" />) : (<div></div>)}
+            {/* {logoutUser} */}
+            {userContext.status ? (<Redirect to="/" />) : (null)}
         </div>
     )
 }

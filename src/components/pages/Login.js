@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import UserContext from '../../context/user/userContext';
 import NotificationContext from '../../context/notification/notificationContext';
 import { Link } from 'react-router-dom';
+import logo from '../../logo.png';
 
 const Login = () => {
 
@@ -27,17 +28,13 @@ const Login = () => {
     }, [userContext.status])
 
     return (
-        <div className='text-center'>
-            <p className='lead'>Login Page</p>
-            <form onSubmit={onSubmit}>
-                <input
-                    type='text'
-                    name='name'
-                    placeholder='Name'
-                    value={userDetail.name}
-                    onChange={onChangeHandler}
-                    autoComplete="off"
-                />
+        <div className="my-10 border border-transparent w-1/3 m-auto select-none">
+            <img src={logo} className="w-20 mb-2 fill-current text-blue-400"></img>
+            <p className='text-center pb-2 text-2xl antialiased font-normal tracking-wide text-opacity-80'>Sign-In to eCom</p>
+            <form
+                onSubmit={onSubmit}
+                className="flex justify-center item-center flex-col 
+                min-w-max max-w-max mx-auto p-3 h-3/5">
                 <input
                     type='text'
                     name='username'
@@ -45,6 +42,7 @@ const Login = () => {
                     value={userDetail.username}
                     onChange={onChangeHandler}
                     autoComplete="off"
+                    className="border border-black rounded-2xl px-3 py-1 placeholder-gray-500 outline-none mb-3"
                 />
                 <input
                     type='password'
@@ -53,10 +51,18 @@ const Login = () => {
                     value={userDetail.password}
                     autoComplete="off"
                     onChange={onChangeHandler}
+                    className="border border-black rounded-2xl px-3 py-1 placeholder-gray-500 outline-none mb-3"
                 />
-                <input type='submit' value='Login' className='btn btn-dark btn-sm my-1' ></input>
-                <Link to='/signup' className='btn btn-dark btn-med my-1'>Sign Up</Link>
+                <input
+                    type='submit'
+                    value='Login'
+                    className='border rounded-3xl outline-none bg-blue-400 text-2xl max-w-max px-6 py-0.5 mx-auto cursor-pointer'
+                />
             </form>
+            <div className="flex justify-center mt-3">
+                <span className="pr-2">Not a User ?</span>
+                <Link to='/signup' className="text-blue-400 underline">Sign Up</Link>
+            </div>
         </div>
     )
 }

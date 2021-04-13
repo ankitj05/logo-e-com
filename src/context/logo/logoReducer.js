@@ -10,9 +10,12 @@ export default (state, action) => {
     switch (action.type) {
 
         case ADD_TO_CART:
+            let item = state.logos.find(item => item.name == action.payload.name)
+            if (item) item.added = true
             return {
                 ...state,
-                cart: [...state.cart, action.payload]
+                cart: [...state.cart, action.payload],
+                logos: [...state.logos, item]
             }
 
         case UPDATE_CART:
@@ -27,6 +30,8 @@ export default (state, action) => {
             if (index !== -1) {
                 state.cart.splice(index, 1);
             }
+            let logo = state.logos.find(item => item.name == action.payload.name)
+            if (logo) logo.added = false
             return {
                 ...state,
                 cart: [...state.cart]

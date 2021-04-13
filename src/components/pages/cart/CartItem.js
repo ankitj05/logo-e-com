@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import LogoContext from '../../../context/logo/logoContext';
+import { IoIosAdd, IoIosRemove } from 'react-icons/io'
 
 const CartItem = ({ cart: { img, name, qty } }) => {
     const [companyname, setCompanyName] = useState('');
@@ -55,30 +56,24 @@ const CartItem = ({ cart: { img, name, qty } }) => {
     }
 
     return (
-        <div className='card grid-2'>
+        <div className='grid grid-cols-2 gap-1 p-4'>
             <div className='all-center'>
                 <img
                     src={img}
                     alt=''
-                    style={{
-                        maxWidth: '230px',
-                        maxHeight: '150px',
-                        width: 'auto',
-                        height: 'auto'
-                    }}
+                    className="w-40 h-40 object-contain"
                 />
-                {/* <p><strong>Logo Name:</strong> {name}</p> */}
             </div>
             <div>
-                <form>
+                <form className="flex flex-col items-center space-y-4">
                     <input
                         type='text'
                         name='companyName'
                         placeholder='Company Name'
                         value={companyname}
                         onChange={updateCompanyName}
-                        autocomplete="off"
-                        style={{ width: '100%', margin: '1.2rem 0' }}
+                        autoComplete="off"
+                        className="border rounded-xl border-gray-400 px-4 h-8 outline-none"
                     />
                     <input
                         type='text'
@@ -86,17 +81,17 @@ const CartItem = ({ cart: { img, name, qty } }) => {
                         placeholder='Description'
                         value={logoDescription}
                         onChange={updateDescription}
-                        style={{ width: '100%', margin: '1.2rem 0' }}
-                        autocomplete="off"
+                        className="border rounded-xl border-gray-400 px-4 h-28 outline-none"
+                        autoComplete="off"
                     />
                 </form>
-                <div style={{ display: 'flex' }}>
-                    <p className='btn my-1'><strong>Qty:</strong></p>
-                    <input type='submit' value='Add' onClick={updateQty} className='btn btn-dark btn-sm my-1' />
-                    <p className='btn my-1'> {qty}</p>
-                    <input type='submit' value='Delete' onClick={updateQty} className='btn btn-dark btn-sm my-1' />
+                <div className="flex">
+                    <p className='p-2 font-medium'>Qty:</p>
+                    <input type='submit' value='Add' onClick={updateQty} className='cursor-pointer my-1 outline-none' />
+                    <p className='p-2'> {qty}</p>
+                    <input type='submit' value='Delete' onClick={updateQty} className='cursor-pointer my-1 outline-none' />
                 </div>
-                <input type='submit' value='Update details' className='btn btn-white btn-sm my-1' onClick={updateDetails} />
+                <input type='submit' value='Update details' className='border bg-blue-300 rounded-2xl px-2 py-1 outline-none cursor-pointer' onClick={updateDetails} />
             </div>
         </div>
     )

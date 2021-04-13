@@ -13,12 +13,14 @@ const Checkout = () => {
         return (
             <Fragment>
                 <img src={done} alt='Loading...' style={{ width: '200px', margin: 'auto', display: 'block' }}></img>
-                <p className='text-center lead'>Your order is placed.</p>
-                <p className='lead'><strong>Order Details:</strong></p>
-                <div className='grid-2'>
-                    {cart.map(cart => (
-                        <CheckoutItem key={cart.name} cart={cart} />
-                    ))}
+                <p className='text-center font-normal text-2xl pt-3'>Your order is placed.</p>
+                <div className="flex flex-col justify-center mx-auto w-max">
+                    <p className='text-xl font-medium p-3'>Order Details:</p>
+                    <div className='flex justify-center mx-auto'>
+                        {cart.map(cart => (
+                            <CheckoutItem key={cart.name} cart={cart} />
+                        ))}
+                    </div>
                 </div>
             </Fragment>
         )

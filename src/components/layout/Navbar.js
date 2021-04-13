@@ -1,35 +1,34 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import UserContext from '../../context/user/userContext';
+import { GoHome } from 'react-icons/go'
+import { FiShoppingCart } from 'react-icons/fi'
+import logo from '../../logo.png';
 
-const Navbar = ({ icon, title }) => {
+
+const Navbar = () => {
 
     const userContext = useContext(UserContext);
 
     return (
-        <div className='navbar bg-primary'>
-            <h1>
-                <i className={icon}></i>{title}
-            </h1>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                {(userContext.status) ? (
-                    <>
-                        <li>
-                            <Link to={`/cart/${userContext.user.name}`}>Cart</Link>
-                        </li>
-                        <li>
-                            <Link to="/logout">Logout</Link>
-                        </li>
-                    </>
-                ) :
-                    (
-                        <></>
-                    )
-                }
-            </ul>
+        <div>
+            {(userContext.status) ? (
+                <div className="bg-blue-300 p-3">
+                    <div className="pb-1">
+                        <Link to="/" className="w-10 float-left outline-none">
+                            <img src={logo}></img>
+                        </Link>
+                    </div>
+                    <div className="flex flex-wrap justify-end items-center space-x-5">
+                        <Link to="/"><GoHome size="2em" /></Link>
+                        <Link to={`/cart/${userContext.user.username}`}><FiShoppingCart size="2em" /></Link>
+                        <Link to="/logout" className="text-xl ">Logout</Link>
+                    </div>
+                </div>
+            ) :
+                (null)
+            }
+            {/* </ul> */}
         </div>
     )
 }

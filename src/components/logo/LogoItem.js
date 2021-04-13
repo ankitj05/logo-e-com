@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import LogoContext from '../../context/logo/logoContext';
 
-const LogoItem = ({ logo: { img, name } }) => {
+const LogoItem = ({ logo: { img, name, added } }) => {
 
     const logoContext = useContext(LogoContext);
-    const [btnValue, setbtnValue] = useState('Add to Cart');
 
     const checkItem = () => {
         let item = {
@@ -24,37 +23,24 @@ const LogoItem = ({ logo: { img, name } }) => {
                 description: ''
             }
             logoContext.updateItemCart(updatedItem);
-            updateButtonValue();
             return;
         }
         logoContext.addToCart(item);
-        updateButtonValue();
-    }
-
-    const updateButtonValue = () => {
-        setbtnValue('Added');
-        // setTimeout(() => {
-        //     setbtnValue('Add to Cart');
-        // }, 500);
     }
 
     return (
-        <div className='card text-center'>
+        <div className='flex flex-col items-center border border-black rounded-3xl w-48 h-48 p-3 m-3'>
             <img
+                className="w-20 h-20 object-contain"
                 src={img}
                 alt=''
-                style={{
-                    maxWidth: '230px',
-                    maxHeight: '95px',
-                    width: 'auto',
-                    height: 'auto'
-                }} />
-            {/* <h3>{name}</h3> */}
+            />
+            <h3>{name}</h3>
             <div>
                 <input
                     type='submit'
-                    className='btn btn-dark btn-sm my-1'
-                    value={btnValue}
+                    className='border rounded-2xl px-2 py-1 mt-4 cursor-pointer outline-none bg-blue-300'
+                    value={added ? 'Added' : 'Add to cart'}
                     onClick={checkItem} />
             </div>
         </div>

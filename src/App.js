@@ -1,4 +1,3 @@
-import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Cart from './components/pages/cart/Cart';
@@ -20,9 +19,9 @@ const App = () => {
       <LogoState>
         <NotificationState>
           <Router>
-            <div className="App">
+            <div className="">
               <Navbar />
-              <div className='container'>
+              <div className=''>
                 <Notification />
                 <Switch>
                   <Route exact path='/' component={Home} />
